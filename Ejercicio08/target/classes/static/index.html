@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+    <title>Calculadora</title>
+    
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></head>
+<script>
+    function enviarPeticionAsincrona(){
+        let xmlHttp = new XMLHttpRequest()
+        
+        //Metodos de retrollamada/callbacks
+        xmlHttp.onreadystatechange = function(){
+            //propiedad readyState
+            //0-Valor inicial, simplemente hemos creado el objeto xmlHttpRequest
+            //1-Open
+            //2-Send
+            //3-Comienza a recibirse la respuesta
+            //4-Respuesta completa
+            if( this.readyState == 4){
+                if(this.status == 200){
+                    procesarRespuesta(this.responseText)
+                } else {
+                    alert("ZASCA!")
+                }
+            }
+        }
+        
+        let parametros = "nombre="+nombre.value
+        xmlHttp.open('GET', 
+                    'http://localhost:8080/servicio/busquedas?'+parametros, 
+                    true)
+        xmlHttp.send(null)
+        console.log("responseText:"+xmlHttp.responseText)
+
+    }
+</script>
+<body>
+    <div class="container">
+        <h1 class="display-2">Calculadora</h1>
+        <br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="operando1">Operando 1</span>
+            </div>
+            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="operando2">Operando 2</span>
+            </div>
+            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Operador</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="sum">Suma</option>
+                <option value="res">Resta</option>
+                <option value="div">División</option>
+                <option value="mul">Multiplicación</option>
+            </select>
+        </div>
+
+        <input type="button" class="btn btn-primary" value="Calcular" />
+
+        <br><br>
+        <div class="alert alert-primary" role="alert">
+            <span>Resultado: </span>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

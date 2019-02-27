@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Calculadora</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script
+ src="https://code.jquery.com/jquery-3.3.1.js"
+ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+ crossorigin="anonymous"></script>
+</head>
+<script>
+
+    $( document ).ready(function(){
+        $("#searchInput").val("");
+        $("#btnSearch").click(function(){
+            var textInput = $("#searchInput").val();
+            llamadaBuscar( textInput );
+        });
+    });
+
+    function llamadaBuscar( textInput ){
+        var xhr1 = new XMLHttpRequest();
+		var url = 'http://localhost:8080/Ejercicio07/mvc/operacion/buscar/' + textInput;
+		$("#listadoOperacionesul").empty();
+
+		xhr1.onreadystatechange = function() {
+			if (this.readyState == 4){
+				if (this.status == 200){
+					var obj = JSON.parse(this.responseText);
+                    tratarResultados(obj);	
+                    $("#backlog").removeClass("alert-danger");
+                    $("#backlog").addClass("alert-primary");
+                    $("#spanId").text("Resultado:");			
+				}else{
+					$("#backlog").removeClass("alert-primary");
+					$("#backlog").addClass("alert-danger");
+					$("#spanId").text("ERROR");
+				}
+			}
+		}
+
+		xhr1.open('GET', url, true);
+		xhr1.send(null);
+    }
+
+    function tratarResultados( obj ){
+        $("#listadoOperaciones").text(obj.resultado);
+        for (var key in obj) {
+            var key1 = obj[key];
+            for (var y in key1) {
+                $("#listadoOperacionesul").append('<li class="list-group-item">' + key1[y].num1 + ' ' + key1[y].operador + ' ' + key1[y].num2 + ' = ' + key1[y].resultado + '</li>');
+            }
+        }	
+    }
+
+	function peticionListado() {
+		var xhr = new XMLHttpRequest();
+		var url = 'http://localhost:8080/Ejercicio07/mvc/operacion/listar';
+		$("#listadoOperacionesul").empty();
+		$("#listadoOperaciones").removeClass("invisible");
+		$("#listadoOperaciones").addClass("visible");
+
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4){
+				if (this.status == 200){
+					var obj = JSON.parse(this.responseText);
+                    tratarResultados(obj);
+                    $("#backlog").removeClass("alert-danger");
+                    $("#backlog").addClass("alert-primary");
+                    $("#spanId").text("Resultado:");
+				}else{
+					$("#backlog").removeClass("alert-primary");
+					$("#backlog").addClass("alert-danger");
+					$("#spanId").text("ERROR");
+				}
+			}
+		}
+
+		xhr.open('GET', url, true);
+		xhr.send(null);
+	}
+
+	function calcularOperacion() {		
+		var inputs = document.getElementsByTagName("input");
+		var selectOperador = document.getElementsByTagName("select");
+		
+		var data = {};
+		data.num1 = inputs[0].value;
+		data.num2 = inputs[1].value;
+		data.operador = selectOperador[0].value
+		
+		var xhr = new XMLHttpRequest();
+		var url = 'http://localhost:8080/Ejercicio07/mvc/operacion';
+
+		xhr.open('POST', url, true);
+	 	xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+	 	
+		xhr.onload = function () {
+			if( this.readyState == 4 ){
+				if (this.status == 201 ){
+                    var obj = JSON.parse(this.responseText);
+                    document.getElementById("resultado").value = obj.resultado;
+                    $("#backlog").removeClass("alert-danger");
+                    $("#backlog").addClass("alert-primary");
+                    $("#spanId").text("Resultado:");
+				}else{
+					$("#backlog").removeClass("alert-primary");
+					$("#backlog").addClass("alert-danger");
+					$("#spanId").text("ERROR");
+				}
+			}
+		}
+		
+	 	xhr.send(JSON.stringify(data));
+	}
+
+</script>
+<body>
+	<div class="container">
+		<h1 class="display-2">Calculadora</h1>
+		<br>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="operando1">Operando 1</span>
+			</div>
+			<input type="text" class="form-control" placeholder="" required
+				aria-label="Username" aria-describedby="basic-addon1">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="operando2">Operando 2</span>
+			</div>
+			<input type="text" class="form-control" placeholder="" required
+				aria-label="Username" aria-describedby="basic-addon1">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<label class="input-group-text" for="operador">Operador</label>
+			</div>
+			<select class="custom-select" id="operadorSelect" required> 
+				<option selected>Elige operación...</option>
+				<option value="sum">Suma</option>
+				<option value="minus">Resta</option>
+				<option value="div">División</option>
+				<option value="mul">Multiplicación</option>
+			</select>
+		</div>
+
+		<input type="button" class="btn btn-primary" value="Calcular" onclick="calcularOperacion()" /> 
+		<input type="button" class="btn btn-primary" value="Ver listado operaciones" onclick="peticionListado()" /> 
+		<br><br>
+		<div class="alert alert-primary" id="backlog" role="alert">
+			<span id="spanId">Resultado: </span>
+			<input id="resultado" type="button" class="btn btn-primary" value=""  /> 
+		</div>
+		
+		<div class="alert alert-primary invisible" id="listadoOperaciones" role="alert">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" id="searchInput" aria-label="Search">
+                <input type="button" class="btn btn-outline-success" id="btnSearch" value="Buscar">
+            </form><br>
+			<ul class="list-group" id="listadoOperacionesul">
+			</ul>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
