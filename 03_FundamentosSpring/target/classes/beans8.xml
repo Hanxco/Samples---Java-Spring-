@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="persona" class="ejemplo8.Persona" autowire="byName" scope="prototype">
+		<property name="nombre" value="Bob Esponja"></property>
+		<property name="edad" value="20"></property>
+	</bean>
+	
+	<bean id="direccion" class="ejemplo8.Direccion" scope="prototype">
+		<property name="tipoVia" value="piña"></property>
+		<property name="nombreVia" value="Debajo del mar"></property>
+		<property name="cp" value="28043"></property>
+		<property name="pais" value="mar"></property>
+	</bean>
+
+	<bean id="direccion2" class="ejemplo8.Direccion">
+		<property name="tipoVia" value="piña"></property>
+		<property name="nombreVia" value="Debajo del mar"></property>
+		<property name="cp" value="28043"></property>
+		<property name="pais" value="mar"></property>
+	</bean>
+
+
+</beans>
+
