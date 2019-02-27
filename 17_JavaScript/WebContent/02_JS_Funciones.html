@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+
+
+/* EJERCICIOS DE CLASE */
+function sumar(n1, n2){
+	return n1+n2;
+}
+
+function saludar(){
+	console.log("hola muñonaso!")
+}
+
+function pruebaArgumentos(){
+	console.log("======SUMA TOTAL======");
+	let total = 0;
+	for(let a=0; a<arguments.length; a++){
+		total += arguments[a];
+	}
+	console.log(total);
+}
+
+pruebaArgumentos(1,2);
+pruebaArgumentos();
+pruebaArgumentos(1,2,3,4);
+
+function imprimir(pelicula){
+	// podemos tener funciones anidadas
+	function imprimirPorConsola(pelicula){
+		console.log(pelicula);
+	}
+	imprimirPorConsola(pelicula)
+}
+
+imprimir("dos tontos muy muñones");
+
+let multiplicar = function(m1,m2){
+	return m1*m2;
+}
+
+console.log(multiplicar(4,2))
+
+console.log('######################');
+function crearDocumento(datos, funcion){
+	console.log("creando documento");
+/*	if(tipoDoc == "factura"){
+		//codigo necesario para crear una factura
+	}else if(tipoDoc == "pedido"){
+		// codigo necesario para crear un pedido
+	} */
+	let codigo = funcion(datos)
+	console.log(codigo)
+}
+
+function crearCodigoFactura(cuerpo){
+	console.log('Creando codigo para la factura');
+	return("Factura-1: LO QUE SEA" + cuerpo);
+}
+
+function crearCodigoPedido(cuerpo){
+	console.log('Creando codigo para el pedido');
+	return("Pedido-1: LO QUE SEA" + cuerpo);
+}
+
+crearDocumento("Datos1", crearCodigoFactura)
+crearDocumento("Datos2", crearCodigoPedido)
+
+</script>
+<body>
+	<div class="container">
+		<h1>JAVA SCRIPT</h1>
+		<input type="button" id="button1" class="btn btn-primary" value="Empezar"/>	
+		<p>HOLA</p>
+
+		<div class="day">
+			<div class="element"></div>
+		</div>	
+		<div class="day"></div>
+	</div>
+</body>
+</html>

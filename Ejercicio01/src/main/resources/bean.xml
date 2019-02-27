@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="persona" class="Inmobiliaria.Persona" scope="prototype">
+		<property name="nombre" value=""></property>
+		<property name="apellidos" value=""></property>
+		<property name="edad"   value="0"></property>
+		<property name="dni"   value=""></property>	
+	</bean>
+	
+	<bean id="direccion" class="Inmobiliaria.Direccion">
+		<property name="tipoVia" value=""></property>
+		<property name="nombreVia" value=""></property>
+		<property name="codPostal" value=""></property>
+		<property name="numero" value="0"></property>
+	</bean>
+	
+	<bean id="habitacion" class="Inmobiliaria.Habitacion" scope="prototype">	
+		<property name="tipoEstancia" value=""></property>
+		<property name="metros2" value="0"></property>
+		<property name="tieneVentanas" value=""></property>
+		<property name="tipoHab" value=""></property>
+	</bean>
+	
+	<bean id="casa" class="Inmobiliaria.Casa" scope="prototype">
+		<property name="id" value=""></property>
+		<property name="precio" value=""></property>
+		<property name="direccion" ref="direccion"></property>
+		<property name="plazaGaraje" value=""></property>
+		<property name="trastero" value=""></property>
+		<property name="metrosTotales" value=""></property>
+		<property name="habitaciones" ref="listaHabitaciones"></property>
+		<property name="propietarios" ref="listaPropietarios"></property>
+		<property name="inquilinos" ref="listaInquilinos"></property>
+	</bean>
+	<!-- 
+	<bean id="ListaHabitaciones" class="java.util.Arraylist">
+		<constructor-arg>
+			<list>
+				<ref bean="habitacion1" />
+				<ref bean="habitacion2" />
+			</list>
+		</constructor-arg>
+	</bean>
+	 -->
+	<bean id="listaPropietarios" class="java.util.ArrayList"></bean>
+	<bean id="listaInquilinos" class="java.util.ArrayList"></bean>
+	<bean id="listaHabitaciones" class="java.util.ArrayList"></bean>
+</beans>

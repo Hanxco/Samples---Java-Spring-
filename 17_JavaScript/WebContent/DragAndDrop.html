@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.card').draggable({
+            helper: 'clone'
+        });
+
+        $('.day').droppable({
+            accept: '.card',
+            hoverClass: 'hovering',
+            drop: function (ev, ui) {
+                ui.draggable.detach();
+                $(this).append(ui.draggable);
+            }
+        });
+
+        $('#btnAdd').click(function(){
+
+            var divCardParent = document.createElement('div');
+            divCardParent.className = "card";
+
+            var divCardBody = document.createElement('div');
+            divCardBody.className = "card-body ui-draggable ui-draggable-handle";
+
+            divCardParent.appendChild(divCardBody)
+
+            var titleH5 = document.createElement('h5');
+            titleH5.className = "card-title";
+            var contentTitleh5 = document.createTextNode("TITULO")
+            titleH5.appendChild(contentTitleh5)
+            divCardBody.appendChild(titleH5)
+
+            var cardText = document.createElement('p')
+            cardText.className = "card-text"
+            var cardTextValue = document.createTextNode('AQUI VA EL CUERPO DEL MENSAJE')
+            cardText.appendChild(cardTextValue)
+
+            divCardBody.appendChild(cardText)
+
+            $( "#dayInit" ).append( divCardParent );
+        });
+
+    });
+</script>
+<style>
+    .day {
+	  border: 5px dashed transparent;
+	  background: #ddd;
+	  margin: 5px;
+	  min-height: 8em;
+	  padding: 1em;
+	}
+	
+	.day.hovering {
+	  background: #b6d6fb;
+	  border-color: #276cbc;
+	}
+	
+	.item {
+	  background: white;
+	  cursor: pointer;
+	  display: inline-block;
+	  padding: 1em;
+	}
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+    }
+    .btn-circle.btn-lg {
+        width: 50px;
+        height: 50px;
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 25px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1 class="display-2">YOU DAY</h1>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="text-right">
+                    <button type="button" id="btnAdd" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Not started</h2>
+                <div class="day" id="dayInit">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">
+                                Some quick example text to build on the card title and make up the bulk of the card's
+                                content.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-center">
+                <h2>In progress</h2>
+                <div class="day"></div>
+            </div>
+            <div class="col text-right">
+                <h2>Completed</h2>
+                <div class="day"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

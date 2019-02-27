@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+</head>
+<script>
+    $(document).ready(function () {
+        let color = "#f44336b3";
+        colorBorder();
+
+        // Render bottom border for input field
+        function colorBorder() {
+            $("input[type=text]").css("border-bottom", "2px solid" + color + "");
+        }
+
+        // Define card
+        function card(color, text) {
+            return (
+                `<div class="kanban-card d-flex flex-column" style="background-color:` +
+                color +
+                `">
+            <p>` +
+                text +
+                `</p>
+            <button>
+                <span class="oi oi-x"></span>
+            </button>
+        </div>`
+            );
+        }
+
+        // Add new card
+        $("#inputAddCard").keypress(function (event) {
+            if (event.which === 13) {
+                let text = $(this).val();
+                $(this).val("");
+                $(this)
+                    .next(".list-body")
+                    .append(card(color, text));
+            }
+        });
+
+        // Delete card
+        $(document).on("click", ".kanban-card > button", function () {
+            $(this)
+                .parent()
+                .fadeOut(250, function () {
+                    $(this).remove();
+                });
+        });
+
+        // Toggle input field
+        $("header").on("click", "button", function () {
+            $(this)
+                .children()
+                .toggleClass("oi-chevron-top oi-chevron-bottom");
+            $("input[type=text]").slideToggle();
+        });
+
+        // Toggle chosen color
+        $(".color").on("click", function () {
+            color = $(this).val();
+            $(".oi-check").removeClass("oi-check");
+            colorBorder();
+            $(this)
+                .children()
+                .addClass("oi-check");
+        });
+
+        $(function () {
+            $("#sortable1, #sortable2, #sortable3")
+                .sortable({
+                    connectWith: ".list-body"
+                })
+                .disableSelection();
+        });
+    });
+
+</script>
+<style>
+    body {
+        margin: 0;
+        min-width: 1500px;
+        font-family: "Noto", Tahoma, Geneva, Verdana, sans-serif;
+    } 
+
+    body > header {
+        background: #aeaeae;
+        color: white;
+    }
+
+    h1 {
+        margin: 0;
+        font-weight: 100;
+    }
+
+    h3 {
+        margin-bottom: 0;
+        font-weight: 400;
+    }
+
+    main {
+        margin-top: 8px;
+        display: flex;
+    }
+
+    aside {
+        flex: 1;
+    }
+
+    input[type="text"] {
+        margin-top: 5px;
+        width: 300px !important;
+        height: 30px;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    button {
+        border: 0;
+        background: 0;
+        cursor: pointer;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        color: white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+    }
+
+    .oi-chevron-top,
+    .oi-chevron-bottom {
+        font-size: 20px;
+        color: white;
+    }
+
+    .oi-x {
+        color: black;
+    }
+
+    .oi-check {
+        color: black;
+        font-size: 25px;
+    }
+
+    .colors {
+        align-items: center;
+    }
+
+    .color {
+        box-sizing: border-box;
+        margin-top: 5px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        border: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    .column {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lists {
+        display: flex;
+        justify-content: space-around;
+        flex: 15;
+    }
+
+    .list {
+        align-self: flex-start;
+    }
+
+    .list > header {
+        color: black;
+        display: flex;
+        justify-content: space-between;
+        padding: 2px;
+    }
+
+    .list-body {
+        height: 100%;
+    }
+
+    .kanban-card {
+        background-color: #2196f3;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+        margin-top: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .kanban-card > button {
+        align-self: flex-start;
+    }
+
+    .kanban-card:hover {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    #red {
+        background: #f44336b3;
+    }
+
+    #blue {
+        background: #2196f3b3;
+    }
+
+    #green {
+        background: #4caf50b3;
+    }
+
+    #yellow {
+        background: #ffeb3bb3;
+    }
+    .titleText{
+        margin : 20px;
+    }
+
+</style>
+
+<body>
+    <div class="container">
+        <h1 class="display-2 titleText">MY TASKS</h1>
+        <div class="row">
+            <div class="col col-lg-5">
+                <div class="input-group" style="padding-top:13px;">
+                    <div class="input-group-prepend" >
+                        <label class="input-group-text" for="inputGroupSelect01">Project</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option> 
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col col-lg-6">
+                <button id="red" class="color" value="#f44336b3">
+                    <span class="oi"></span>
+                </button>
+                <button id="blue" class="color" value="#2196f3b3">
+                    <span class="oi oi-check"></span>
+                </button>
+                <button id="green" class="color" value="#4caf50b3">
+                    <span class="oi"></span>
+                </button>
+                <button id="yellow" class="color" value="#ffeb3bb3">
+                    <span class="oi"></span>
+                </button>
+            </div>
+            <div class="col col-lg-1">
+                <input type="button" class="btn btn-success" value="Add" />
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col col-lg-4">
+                <section class="column list">
+                    <div class="card">
+                        <div class="card-header">
+                            Not Started
+                        </div>
+                        <div class="card-body">
+                            <input type="text" id="inputAddCard" placeholder="Add new task">
+                            <div id="sortable1" class="list-body">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col">
+                <section class="column list">
+                    <div class="card">
+                        <div class="card-header">
+                            In Progress
+                        </div>
+                        <div class="card-body">
+                            <div id="sortable2" class="list-body">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <header>
+                        <h3></h3>
+                    </header>
+                </section>
+            </div>
+            <div class="col">
+                <section class="column list">
+                    <div class="card">
+                        <div class="card-header">
+                            Completed
+                        </div>
+                        <div class="card-body">
+                            <div id="sortable3" class="list-body">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+    </footer>
+
+</body>
+
+</html>

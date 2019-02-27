@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+
+// los arrays en JS no son verdaderos arrays. Son  objetos
+
+let array1 = [];
+let array2 = [1,2,3,4];
+let array3 = [1,2,3,4,true,"pepe"]
+
+// en JS solo hay un tipo de array pero se pueden usar de dos maneras diferentes
+/*
+* 1 - Indexada : guardan valores, la clave es un indice comienza por 0
+* 2 - Manera asociativa : hasmap la clave no es un indice si no un valor
+*/
+
+// Arrays Indexados
+array1[0] = 10
+array1[1] = 20
+
+// obtener
+let valor = array1[0]
+//ojito con pasarse
+let valor2 = array1[2000]
+console.log(valor2);
+
+// los arrays son objetos y como tales tienen propiedades 
+console.log(array1.length) // solo para indexados
+let array4 = []
+array4.push('A')
+array4.push('B')
+array4.push('C')
+array4.push('C',"E")
+
+console.log(array4);
+console.log(array4.length)
+
+console.log(array4.shift)
+console.log(array4.pop)
+
+/*
+Arrays asociados (Estructuras HASH)
+No estan indexados
+basados en duplas de clave-valor
+una sola clave, la clavew es unica
+la clavew y el valor son objetos de cauqlueir tipo
+*/
+
+let cervezas = [];
+cervezas["Mahou"] = "4.8"
+cervezas["San Miguel"] = "4.6"
+cervezas["Guiness"] = "7"
+
+console.log(cervezas["Mahou"])
+
+console.log(cervezas)
+delete cervezas["San Miguel"]
+console.log(cervezas)
+
+/* 
+    Sintaxis especifica de los arrays asociativos
+*/ 
+
+let persona = [] 
+persona["nombre"] = "Oliver Atom"
+persona["direccion"] = "Jap�n"
+persona["telefono"] = "no tenia"
+
+let nombre = persona["nombre"]
+let direccion = persona.direccion
+let tacata = persona.tacata
+
+let coche = []
+coche.marca = "Renault"
+coche.modelo="207"
+coche.matricula = "988888C"
+
+console.log(coche)
+
+let pelicula = {
+    titulo : "Todo sobre mi madre",
+    director : "Almodovar",
+    anio : 1999
+}
+
+// podemos add atributos
+pelicula.actor = "Bardem"
+
+console.log(pelicula)
+
+let cliente = {
+    nombre : "Bender Bending Rodriguez",
+    direccion : "NYC",
+    saludar : function(){
+        console.log("BESA MI BRILLANTE CULO METALICO");
+    }
+}
+
+console.log(cliente.nombre)
+cliente.saludar();
+
+// arrays indexados iterate
+for(let numero of array2){
+    console.log(numero)
+}
+
+// para arrays asociativos
+for(let clave in cliente){
+    console.log(clave + " : " + cliente.clave)
+}
+
+</script>
+<body>
+	<div class="container">
+		<h1>JAVA SCRIPT</h1>
+	</div>
+</body>
+</html>

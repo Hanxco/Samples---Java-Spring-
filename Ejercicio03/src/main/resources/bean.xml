@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="dataSource" 
+	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"             value="jdbc:mysql://localhost:3306/ejercicio03?useSSL=false&amp;serverTimezone=UTC" />
+		<property name="username"        value="root" />
+		<property name="password"        value="root" />
+	</bean>	
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<context:component-scan base-package="modelo"></context:component-scan>
+
+	<!--  MENU CONFIG  -->
+	<bean id="menu" class="modelo.entidades.Menu">
+		<property name="listaOpciones">
+			<list>
+				<bean class="modelo.entidades.Opcion">
+					<property name="id" value="1"></property>
+					<property name="titulo" value="Dar de alta nuevo coche"></property>
+				</bean>
+				<bean class="modelo.entidades.Opcion">
+					<property name="id" value="2"></property>
+					<property name="titulo" value="Ver listado"></property>
+				</bean>
+				<bean class="modelo.entidades.Opcion">
+					<property name="id" value="3"></property>
+					<property name="titulo" value="Buscar un coche por Matricula"></property>
+				</bean>
+				<bean class="modelo.entidades.Opcion">
+					<property name="id" value="4"></property>
+					<property name="titulo" value="Modificar un coche"></property>
+				</bean>
+				<bean class="modelo.entidades.Opcion">
+					<property name="id" value="5"></property>
+					<property name="titulo" value="Borrar un coche"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>
