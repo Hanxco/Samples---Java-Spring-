@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="procesador1" class="modelo.entidades.Componente">
+		<property name="id" value="0"></property> 
+		<property name="nombre" value="Intel Core i5-8600K 3.6GHz BOX"></property>
+		<property name="caracteristicas" value="Te presentamos el Intel Core i5-8600K, un procesador de 8ª Generación y socket Intel 1151."></property>
+		<property name="familia" value="Procesadores"></property>
+		<property name="marca" value="Intel"></property>
+		<property name="modelo" value="i5"></property>
+		<property name="precio" value="250.5"></property>
+		<property name="imgUrl" value="https://thumb.pccomponentes.com/w-530-530/articles/14/142036/1420360.jpg"></property>
+	</bean>
+	
+	<bean id="procesador2" class="modelo.entidades.Componente">
+		<property name="id" value="1"></property> 
+		<property name="nombre" value="Intel Core i5-7400 3.0GHz BOX"></property>
+		<property name="caracteristicas" value="Procesador Intel de la familia i5"></property>
+		<property name="familia" value="Procesadores"></property>
+		<property name="marca" value="Intel"></property>
+		<property name="modelo" value="i5"></property>
+		<property name="precio" value="191.99"></property>
+		<property name="imgUrl" value="https://thumb.pccomponentes.com/w-530-530/articles/11/112147/intel-i5-6600k-3-5ghz.jpg"></property>		
+	</bean>
+	
+	<bean id="procesador3" class="modelo.entidades.Componente">
+		<property name="id" value="2"></property> 
+		<property name="nombre" value="Procesador AMD Ryzen 5 2600 3.4 Ghz"></property>
+		<property name="caracteristicas" value="Te presentamos el AMD Ryzen 5 2600, un procesador que cuenta con 6 núcleos, socket AMD AM4 y arquitectura de 64 bits."></property>
+		<property name="familia" value="Procesadores"></property>
+		<property name="marca" value="AMD"></property>
+		<property name="modelo" value="i3"></property>
+		<property name="precio" value="167.90"></property>
+		<property name="imgUrl" value="https://thumb.pccomponentes.com/w-530-530/articles/15/157402/6.jpg"></property>
+	</bean>
+	
+	<bean id="ram1" class="modelo.entidades.Componente">
+		<property name="id" value="0"></property> 
+		<property name="nombre" value="G.Skill Ripjaws V Red DDR4 3000 PC4-24000 16GB 2x8GB CL15"></property>
+		<property name="caracteristicas" value="La nueva gama G.Skill Ripjaws V ofrece soluciones para un rendimiento increíble. Estos kits optimizar el rendimiento de las plataformas de nueva generación, con la ventaja añadida un alto potencial de overclocking. "></property>
+		<property name="familia" value="Memorias RAM"></property>
+		<property name="marca" value="AMD"></property>
+		<property name="modelo" value="i3"></property>
+		<property name="precio" value="167.90"></property>
+		<property name="imgUrl" value="https://thumb.pccomponentes.com/w-530-530/articles/8/85998/g-skill-ripjaws-5-red-ddr4-2133-pc4-17000-8gb-2x4gb-cl15-2.jpg"></property>
+	</bean>
+	
+	<bean id="ssd1" class="modelo.entidades.Componente">
+		<property name="id" value="0"></property> 
+		<property name="nombre" value="Intel Consumer SSD 660p 1TB NVMe M.2 PCI Express 3.0 Retail"></property>
+		<property name="caracteristicas" value="Impulsado por la innovadora tecnología Intel® QLC de Intel, el Intel® SSD 660p ofrece capacidades mayores a un coste inferior que las opciones basadas en TLC1. Con PCIe*, el nuevo SSD 660p evita SATA y sus limitaciones para ofrecer hasta 2 TB en una unidad."></property>
+		<property name="familia" value="SSD"></property>
+		<property name="marca" value="AMD"></property>
+		<property name="modelo" value="i3"></property>
+		<property name="precio" value="167.90"></property>
+		<property name="imgUrl" value="https://thumb.pccomponentes.com/w-530-530/articles/18/183869/1.jpg"></property>
+	</bean>
+	
+	<bean id="grafica1" class="modelo.entidades.Componente">
+		<property name="id" value="0"></property> 
+		<property name="nombre" value="Zotac Gaming GeForce RTX 2080 AMP Extreme 8GB GDDR6"></property>
+		<property name="caracteristicas" value="La nueva generación de tarjetas gráficas ZOTAC GAMING GeForce está aquí. Basado en la nueva arquitectura NVIDIA Turing, está repleto de más núcleos y la nueva memoria ultra rápida GDDR6. Integrado con tecnologías más inteligentes y optimizadas, prepárese para ser rápido y un juego fuerte como nunca antes."></property>
+		<property name="familia" value="Tarjetas Gráficas"></property>
+		<property name="marca" value="AMD"></property>
+		<property name="modelo" value="i3"></property>
+		<property name="precio" value="929"></property>
+		<property name="imgUrl" value="https://thumb.pccomponentes.com/w-530-530/articles/17/174923/1.jpg"></property>
+	</bean>
+	
+	<bean id="caja1" class="modelo.entidades.Componente">
+		<property name="id" value="0"></property> 
+		<property name="nombre" value="Cooler Master MasterCase MC600P USB 3.0 Cristal Templado Negro"></property>
+		<property name="caracteristicas" value="La nueva generación de tarjetas gráficas ZOTAC GAMING GeForce está aquí. Basado en la nueva arquitectura NVIDIA Turing, está repleto de más núcleos y la nueva memoria ultra rápida GDDR6. Integrado con tecnologías más inteligentes y optimizadas, prepárese para ser rápido y un juego fuerte como nunca antes."></property>
+		<property name="familia" value="Cajas"></property>
+		<property name="marca" value="AMD"></property>
+		<property name="modelo" value="i3"></property>
+		<property name="precio" value="125"></property>
+		<property name="imgUrl" value="https://thumb.pccomponentes.com/w-530-530/articles/15/154422/d1.jpg"></property>
+	</bean>
+	
+	<bean id="tienda" class="modelo.entidades.Tienda">
+		<property name="listadoProcesadores">
+			<list>
+				<ref bean="procesador1"></ref>
+				<ref bean="procesador2"></ref>
+				<ref bean="procesador3"></ref>
+			</list>
+		</property>
+		<property name="listadoRAM">
+			<list>
+				<ref bean="ram1"></ref>
+			</list>
+		</property>
+		<property name="listadoAlmacenamiento">
+			<list>
+				<ref bean="ssd1"></ref>
+			</list>
+		</property>
+		<property name="listadoCajas">
+			<list>
+				<ref bean="caja1"></ref>
+			</list>
+		</property>
+		<property name="listadoGraficas">
+			<list>
+				<ref bean="grafica1"></ref>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="listComponentes" class="java.util.ArrayList" scope="prototype"></bean>
+	<bean id="listpcs" class="java.util.ArrayList" scope="session"></bean>
+</beans>
